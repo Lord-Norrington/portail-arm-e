@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forces Armées de Sa Majesté — Ministère de la Défense (Novarcis)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --def-navy: #111827;
+      --def-blue: #1e3a8a;
+      --accent-gold: #c5a059;
+      --gold-light: #fef08a;
+      --paper-bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --border-color: #cbd5e1;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-main);
+      background: var(--paper-bg);
+    }
+
+    /* HEADER COMBINÉ ÉPURÉ & CENTRÉ */
+    header {
+      background: linear-gradient(180deg, var(--bg-dark) 0%, var(--def-navy) 100%);
+      color: white;
+      border-bottom: 3px solid var(--accent-gold);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      text-align: center;
+      padding-top: 25px;
+    }
+    .header-brand-box {
+      max-width: 900px;
+      margin: auto;
+      padding: 0 20px 20px;
+    }
+    .header-logo-img {
+      height: 95px;
+      object-fit: contain;
+      cursor: zoom-in;
+      margin-bottom: 12px;
+    }
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #f8fafc;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .brand-sub {
+      font-size: 12px;
+      color: var(--accent-gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .brand-motto {
+      font-size: 13px;
+      color: #94a3b8;
+      font-style: italic;
+      margin: 0;
+    }
+
+    /* NAVIGATION BAR */
+    nav {
+      background: rgba(9, 13, 22, 0.98);
+      border-top: 1px solid rgba(197, 160, 89, 0.3);
+      margin-top: 15px;
+    }
+    .nav-links {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      gap: 2px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: #cbd5e1;
+      padding: 16px 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .nav-btn:hover, .nav-btn.active { color: var(--gold-light); background: rgba(255, 255, 255, 0.08); }
+    .nav-btn.active { border-bottom: 3px solid var(--accent-gold); }
+
+    /* LAYOUT GENERAL */
+    .wrap { max-width: 1200px; margin: auto; padding: 35px 15px; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+    .panel-header {
+      padding: 18px 24px;
+      background: #e2e8f0;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .panel-title { font-family: 'Cinzel', serif; font-size: 18px; color: var(--def-navy); margin: 0; }
+    .panel-logo-icon { height: 48px; object-fit: contain; cursor: zoom-in; }
+
+    /* BOUTON GRADES */
+    .btn-grades {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: var(--def-navy);
+      color: var(--gold-light);
+      border: 1px solid var(--accent-gold);
+      border-radius: 4px;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-grades:hover { background: var(--def-blue); transform: translateY(-2px); }
+
+    /* STATS BOX & CARDS */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .stat-box {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent-gold);
+      padding: 15px;
+      border-radius: 4px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .stat-box:hover { background: #e2e8f0; transform: translateY(-2px); }
+    .stat-number { font-family: 'Cinzel', serif; font-size: 20px; font-weight: 700; color: var(--def-navy); margin-top: 5px; }
+    .stat-label { font-size: 12px; color: #64748b; text-transform: uppercase; font-weight: 600; }
+
+    /* GRILLES ET CARTES COMMANDANTS / ÉQUIPEMENTS */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px 0; }
+    .person-card, .equip-card {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .person-card:hover, .equip-card:hover { border-color: var(--accent-gold); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+    
+    .person-avatar {
+      width: 130px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 2px solid var(--accent-gold);
+      margin-bottom: 12px;
+      background: #e2e8f0;
+      cursor: zoom-in;
+    }
+    .equip-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 12px;
+      cursor: zoom-in;
+    }
+    .card-title { font-family: 'Cinzel', serif; font-size: 16px; font-weight: 700; color: var(--def-navy); margin: 0 0 4px; }
+    .card-subtitle { font-size: 12px; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+
+    /* MODALE DÉTAILLÉE UNIFIÉE */
+    .modal-window {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(9, 13, 22, 0.88);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 40px 20px;
+    }
+    .modal-content {
+      max-width: 750px;
+      margin: auto;
+      background: white;
+      border: 2px solid var(--accent-gold);
+      border-radius: 8px;
+      padding: 30px;
+      position: relative;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    }
+    .modal-header-flex {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .modal-img-box {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    
+    /* STYLE PERSONNE AVEC BORDURE */
+    .modal-avatar-big {
+      width: 160px;
+      height: 190px;
+      border-radius: 4px;
+      border: 2px solid var(--accent-gold);
+      cursor: zoom-in;
+      background: #f8fafc;
+      padding: 4px;
+      object-fit: cover;
+    }
+
+    /* STYLE IMAGE PLEIN FORMAT SANS LISERÉ DE RESTRICTION */
+    .modal-full-img {
+      max-width: 100%;
+      max-height: 380px;
+      object-fit: contain;
+      cursor: zoom-in;
+      border-radius: 4px;
+    }
+
+    .btn-close {
+      background: var(--def-navy);
+      color: #f8fafc;
+      border: 1px solid var(--accent-gold);
+      padding: 8px 16px;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    /* LIGHTBOX ZOOM */
+    #image-lightbox {
+      display: none;
+      position: fixed;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.92);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+    }
+    #image-lightbox img { max-width: 90%; max-height: 90%; border: 3px solid var(--accent-gold); border-radius: 6px; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+
+    footer { background: var(--bg-dark); color: #94a3b8; text-align: center; padding: 25px 20px; font-size: 12px; border-top: 3px solid var(--accent-gold); margin-top: 50px; }
+
+    @media (max-width: 768px) {
+      .brand-title { font-size: 18px; }
+      .nav-btn { padding: 12px; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand-box">
+    <img src="logo-ministere-defense.jpg" alt="Logo Ministère Défense" class="header-logo-img" onclick="zoomImage(this.src)" onerror="this.style.display='none'">
+    <div class="brand-title">Forces Armées de Sa Majesté</div>
+    <div class="brand-sub">Ministère de la Défense — Royaume-Uni de Novarcis</div>
+    <p class="brand-motto">« Protéger le Royaume, défendre la Souveraineté et garantir la Paix sous la conduite de la Couronne »</p>
+  </div>
+  <nav>
+    <div class="nav-links">
+      <button id="btn-em" class="nav-btn active" onclick="switchTab('tab-etat-major', this)">Haut Commandement & État-Major</button>
+      <button class="nav-btn" onclick="switchTab('tab-terre', this)">Armée de Terre</button>
+      <button class="nav-btn" onclick="switchTab('tab-navy', this)">Royal Navy</button>
+      <button class="nav-btn" onclick="switchTab('tab-raf', this)">Royal Air Force</button>
+      <button class="nav-btn" onclick="switchTab('tab-garde', this)">Garde Royale</button>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <!-- ONGLET 1 : HAUT COMMANDEMENT & ÉTAT-MAJOR -->
+  <div id="tab-etat-major" class="tab-content active">
+    <div class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Le Haut Commandement de la Défense</h2>
+        <img src="logo-ministere-defense.jpg" class="panel-logo-icon" onclick="zoomImage(this.src)" onerror="this.style.display='none'">
+      </div>
+      <div style="padding: 25px; line-height: 1.7;">
+        <p>Le commandement suprême des Forces Armées du Royaume-Uni de Novarcis est exercé par le Souverain, S.M. le Roi James I<sup>er</sup>. La gestion stratégique et opérationnelle est confiée au Chef d'État-Major de la Défense (Chief of the Defence Staff) et aux commandants généraux.</p>
+
+        <h3 style="font-family:'Cinzel',serif; color:var(--def-navy); margin-top:20px;">Commandants Suprêmes</h3>
+        <div class="card-grid">
+          
+          <div class="person-card" onclick="openModalPersonne('S.M. le Roi James Ier', 'Commandant en Chef Suprême des Armées', 'portrait-roi.jpg', 'logo-couronne.jpg', 'En tant que Souverain du Royaume-Uni de Novarcis, Sa Majesté le Roi détient le commandement suprême de l’ensemble des forces armées de terre, de mer et de l’air. C’est en son nom que le serment est prêté par les officiers et soldats.')">
+            <img src="portrait-roi.jpg" class="person-avatar" onclick="event.stopPropagation(); zoomImage(this.src)" onerror="this.src='profil-neutre.jpg'">
+            <div class="card-title">S.M. le Roi James I<sup>er</sup></div>
+            <div class="card-subtitle">Commandant en Chef Suprême</div>
+          </div>
+
+          <div class="person-card" onclick="openModalPersonne('Général Sir Arthur VALENTINE', 'Chef d’État-Major des Armées (CDS)', 'portrait-cds.jpg', 'logo-ministere-defense.jpg', 'Le Général Sir Arthur Valentine coordonne les opérations interarmées, planifie la stratégie militaire globale du Royaume et conseille directement le Premier Ministre et la Couronne sur les questions de défense.')">
+            <img src="portrait-cds.jpg" class="person-avatar" onclick="event.stopPropagation(); zoomImage(this.src)" onerror="this.src='profil-neutre.jpg'">
+            <div class="card-title">Général Sir Arthur VALENTINE</div>
+            <div class="card-subtitle">Chef d’État-Major des Armées</div>
+          </div>
+
+        </div>
+
+        <button class="btn-grades" onclick="openChainModal()">🎖️ Consulter la chaine de commandement</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ONGLET 2 : ARMÉE DE TERRE -->
+  <div id="tab-terre" class="tab-content">
+    <div class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Armée de Terre (British Army)</h2>
+        <img src="logo-armee-terre.jpg" class="panel-logo-icon" onclick="zoomImage(this.src)" onerror="this.style.display='none'">
+      </div>
+      <div style="padding: 25px; line-height: 1.7;">
+        <p>Composante terrestre principale des forces armées, l'Armée de Terre assure la défense du territoire métropolitain et la projection de forces blindées et d'infanterie d'élite.</p>
+
+        <div class="stats-container">
+          <div class="stat-box" onclick="openSingleLogoModal('Effectifs de l’Armée de Terre', '280 000 Hommes', 'logo-armee-terre.jpg', '• 4 divisions blindées et mécanisées (80 000 hommes)<br>• 6 divisions d’infanterie et de défense territoriale (120 000 hommes)<br>• 2 divisions légères, aéroportées et de montagne (30 000 hommes)<br>• Artillerie, génie, défense antiaérienne et unités spécialisées (25 000 hommes)<br>• Services logistiques, commandement et écoles (25 000 hommes)')">
+            <div class="stat-label">Effectifs Actifs (Cliquez pour détails)</div>
+            <div class="stat-number">280 000 hommes</div>
+          </div>
+          <div class="stat-box" onclick="openSingleLogoModal('Flotte de Chars de Combat', '900 Chars Challenger', 'logo-armee-terre.jpg', '• 600 Challenger 3 (Chars lourds de combat principal)<br>• 300 Challenger 2 (En cours de modernisation / Réserve stratégique)')">
+            <div class="stat-label">Chars de Combat (MBT)</div>
+            <div class="stat-number">900 Chars</div>
+          </div>
+          <div class="stat-box" onclick="openSingleLogoModal('Véhicules Blindés & IFV', '2500 Unités', 'logo-armee-terre.jpg', '• 800 Véhicules de combat d’infanterie Warrior<br>• 1000 Blindés de transport de troupes Boxer 8x8<br>• 400 Véhicules de reconnaissance Ajax<br>• 300 véhicules blindés spécialisés (génie, commandement et soutien)')">
+            <div class="stat-label">Véhicules Blindés & IFV</div>
+            <div class="stat-number">2500 Unités</div>
+          </div>
+        </div>
+
+        <h3 style="font-family:'Cinzel',serif; color:var(--def-navy); margin-top:30px;">Chef d'État-Major de l'Armée de Terre</h3>
+        <div class="card-grid">
+          <div class="person-card" onclick="openModalPersonne('Général Marcus BLACKWOOD', 'Chef d’État-Major de l’Armée de Terre', 'portrait-terre.jpg', 'logo-armee-terre.jpg', 'Le Général Blackwood supervise la préparation opérationnelle, l’entraînement des régiments d’infanterie et l’intégration des brigades blindées de l’Armée de Terre.')">
+            <img src="portrait-terre.jpg" class="person-avatar" onclick="event.stopPropagation(); zoomImage(this.src)" onerror="this.src='profil-neutre.jpg'">
+            <div class="card-title">Général Marcus BLACKWOOD</div>
+            <div class="card-subtitle">Chef d'État-Major de l'Armée de Terre</div>
+          </div>
+        </div>
+
+        <button class="btn-grades" onclick="openGradesModal('Armée de Terre', 'grades-terre.jpg')">🎖️ Consulter la Grille des Grades de l'Armée de Terre</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ONGLET 3 : ROYAL NAVY -->
+  <div id="tab-navy" class="tab-content">
+    <div class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Royal Navy & Dissuasion Stratégique</h2>
+        <img src="logo-royal-navy.jpg" class="panel-logo-icon" onclick="zoomImage(this.src)" onerror="this.style.display='none'">
+      </div>
+      <div style="padding: 25px; line-height: 1.7;">
+        <p>Garante de la liberté des mers et de la projection de puissance aéronavale, la Royal Navy exploite également la force de dissuasion nucléaire sous-marine du Royaume.</p>
+
+        <div class="stats-container">
+          <div class="stat-box" onclick="openSingleLogoModal('Personnel Naval', '58 000 Marins', 'logo-royal-navy.jpg', '• 30 000 Personnel Naviguant & Flotte de Surface<br>• 8 000 Royal Marines (Fusiliers marins commandos)<br>• 8 000 Personnel des Écoles Navales & Sous-Mariniers<br>• 12 000 Personnel de l\'aéronavale, de maintenance et de soutien')">
+            <div class="stat-label">Personnel Naval (Cliquez pour détails)</div>
+            <div class="stat-number">58 000 marins</div>
+          </div>
+          <div class="stat-box" onclick="openSingleLogoModal('Détail de la Flotte de Surface', '78 Bâtiments', 'logo-royal-navy.jpg', '• 2 Porte-avions lourds de classe Queen Elizabeth<br>• 6 Destroyers antiaériens Type 45<br>• 12 Frégates Type 23 / Type 26<br>• 8 Sous-marins d’attaque nucléaires (SNA)<br>• 50 Navires patrouilleurs, guerre des mines et ravitailleurs')">
+            <div class="stat-label">Bâtiments de Surface (Cliquez)</div>
+            <div class="stat-number">78 Navires</div>
+          </div>
+          <div class="stat-box" onclick="openSingleLogoModal('Dissuasion Nucléaire (CASD)', 'Force Océanique', 'logo-royal-navy.jpg', '• 4 Sous-marins nucléaires lanceurs d’engins (SNLE) de classe Vanguard / Dreadnought<br>• Permanence à la mer : Au moins 1 SNLE patrouille en permanence<br>• Armement : Missiles balistiques Trident D5 à têtes nucléaires<br>• Arsenal nucléaire national : environ 503 ogives nucléaires, toutes composantes confondues')">
+            <div class="stat-label">Dissuasion Nucléaire (SSBN)</div>
+            <div class="stat-number">4 SNLE & 503 Ogives</div>
+          </div>
+        </div>
+
+        <h3 style="font-family:'Cinzel',serif; color:var(--def-navy); margin-top:30px;">Chef d'État-Major de la Royal Navy</h3>
+        <div class="card-grid">
+          <div class="person-card" onclick="openModalPersonne('Amiral Sir Edward VANE', 'First Sea Lord · Chef d’État-Major de la Marine', 'portrait-navy.jpg', 'logo-royal-navy.jpg', 'L’Amiral Sir Edward Vane commande la Royal Navy et les Royal Marines. Il assure le maintien de la permanence de la force de dissuasion nucléaire sous-marine.')">
+            <img src="portrait-navy.jpg" class="person-avatar" onclick="event.stopPropagation(); zoomImage(this.src)" onerror="this.src='profil-neutre.jpg'">
+            <div class="card-title">Amiral Sir Edward VANE</div>
+            <div class="card-subtitle">Chef d'état major de la Marine (First Sea Lord)</div>
+          </div>
+        </div>
+
+        <h3 style="font-family:'Cinzel',serif; color:var(--def-navy); margin-top:20px;">Navires Amiraux & Porte-Avions</h3>
+        <div class="card-grid">
+          
+          <!-- UTILISATION DE openNavireModal POUR AFFICHER D'ABORD LE LOGO PUIS LE BÂTIMENT ENTIER -->
+          <div class="equip-card" onclick="openNavireModal('HMS Roi Théodore III (R08)', 'Porte-avions de classe Queen Elizabeth', 'porte-avions-1.jpg', 'logo-royal-navy.jpg', 'Premier porte-avions amiral de la flotte. Déplacement de 65 000 tonnes, emportant jusqu’à 40 aéronefs (chasseurs F-35B Lightning II et hélicoptères Merlin).')">
+            <img src="porte-avions-1.jpg" class="equip-img" onclick="event.stopPropagation(); zoomImage(this.src)" onerror="this.src='profil-neutre.jpg'">
+            <div class="card-title">HMS Roi Théodore III</div>
+            <div class="card-subtitle">Porte-Avions Principal</div>
+          </div>
+
+          <div class="equip-card" onclick="openNavireModal('HMS Prince d\'Argelone (R09)', 'Porte-avions de classe Queen Elizabeth', 'porte-avions-2.jpg', 'logo-royal-navy.jpg', 'Second porte-avions lourd de la Royal Navy, assurant la permanence à la mer et la projection combinée de forces aéronavales d’élite.')">
+            <img src="porte-avions-2.jpg" class="equip-img" onclick="event.stopPropagation(); zoomImage(this.src)" onerror="this.src='profil-neutre.jpg'">
+            <div class="card-title">HMS Prince d'Argelone</div>
+            <div class="card-subtitle">Porte-Avions d’Appui</div>
+          </div>
+
+        </div>
+
+        <button class="btn-grades" onclick="openGradesModal('Royal Navy', 'grades-navy.jpg')">🎖️ Consulter la Grille des Grades de la Royal Navy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ONGLET 4 : ROYAL AIR FORCE -->
+  <div id="tab-raf" class="tab-content">
+    <div class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Royal Air Force (RAF)</h2>
+        <img src="logo-raf.jpg" class="panel-logo-icon" onclick="zoomImage(this.src)" onerror="this.style.display='none'">
+      </div>
+      <div style="padding: 25px; line-height: 1.7;">
+        <p>La Royal Air Force assure la supériorité aérienne, la défense du ciel novarcien, le transport stratégique et l'appui aux opérations combinées.</p>
+
+        <div class="stats-container">
+          <div class="stat-box" onclick="openSingleLogoModal('Personnel de la RAF', '45 000 Aviateurs', 'logo-raf.jpg', '• 20 000 Personnels Naviguant & Équipages<br>• 15 000 Techniciens & Maintenance de Vol<br>• 5 000 Protection des bases & Régiment RAF<br>• 5 000 personnels de commandement, de renseignement et de soutien')">
+            <div class="stat-label">Effectifs RAF (Cliquez)</div>
+            <div class="stat-number">45 000 aviateurs</div>
+          </div>
+          <div class="stat-box" onclick="openSingleLogoModal('Flotte de Chasse', '240 Chasseurs', 'logo-raf.jpg', '• 160 Eurofighter Typhoon (Chasse polyvalente & Interception)<br>• 80 F-35B Lightning II (Chasseurs furtifs multi-rôles embarqués/terrestres)')">
+            <div class="stat-label">Avions de Chasse (Cliquez)</div>
+            <div class="stat-number">240 Chasseurs</div>
+          </div>
+          <div class="stat-box" onclick="openSingleLogoModal('Transport, Ravitaillement, Surveillance et Soutien', '105 Appareils', 'logo-raf.jpg', '• 15 Avions de transport lourd C-17 Globemaster III<br>• 25 Avions A400M Atlas<br>• 20 Ravitailleurs en vol Voyager A330 MRTT<br>• 12 avions de surveillance et de détection radar aéroportée (AWACS)<br>• 8 avions de renseignement électronique et de surveillance stratégique<br>• 15 avions de patrouille maritime et de lutte anti-sous-marine<br>• 10 avions d\'entraînement avancé et de liaison')">
+            <div class="stat-label">Transport, Ravitaillement, Surveillance et Soutien</div>
+            <div class="stat-number">105 Appareils</div>
+          </div>
+        </div>
+
+        <h3 style="font-family:'Cinzel',serif; color:var(--def-navy); margin-top:30px;">Chef d'État-Major de la RAF</h3>
+        <div class="card-grid">
+          <div class="person-card" onclick="openModalPersonne('Maréchal RAF Sir Thomas STERLING', 'Chief of the Air Staff · Chef d’État-Major de la RAF', 'portrait-raf.jpg', 'logo-raf.jpg', 'Le Maréchal Sir Thomas Sterling dirige la Royal Air Force, garantit la posture d’alerte permanente de défense aérienne QRA et la modernisation des escadrons.')">
+            <img src="portrait-raf.jpg" class="person-avatar" onclick="event.stopPropagation(); zoomImage(this.src)" onerror="this.src='profil-neutre.jpg'">
+            <div class="card-title">Maréchal RAF Sir Thomas STERLING</div>
+            <div class="card-subtitle">Chef d'État-Major de la RAF</div>
+          </div>
+        </div>
+
+        <button class="btn-grades" onclick="openGradesModal('Royal Air Force', 'grades-raf.jpg')">🎖️ Consulter la Grille des Grades de la RAF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ONGLET 5 : GARDE ROYALE -->
+  <div id="tab-garde" class="tab-content">
+    <div class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Garde Royale de Sa Majesté</h2>
+        <img src="logo-garde-royale.jpg" class="panel-logo-icon" onclick="zoomImage(this.src)" onerror="this.style.display='none'">
+      </div>
+      <div style="padding: 25px; line-height: 1.7;">
+        <p>Unité d'élite d'infanterie et de cavalerie d'État chargée de la protection rapprochée de la Famille Royale, des palais et du protocole des cérémonies de la Couronne.</p>
+
+        <div class="stats-container">
+          <div class="stat-box" onclick="openSingleLogoModal('Garde Royale', '20 000 Gardes', 'logo-garde-royale.jpg', '• Régiment de la Garde à Pied (Palais d’Aldricourt et de Buckingham)<br>• Régiment de la Garde à Cheval (Escorte d’honneur de la Couronne)<br>• Compagnie de protection rapprochée de Sa Majesté le Roi')">
+            <div class="stat-label">Effectifs Garde Royale (Cliquez)</div>
+            <div class="stat-number">20 000 Gardes</div>
+          </div>
+        </div>
+
+        <h3 style="font-family:'Cinzel',serif; color:var(--def-navy); margin-top:30px;">Haut Commandement de la Garde Royale</h3>
+        <div class="card-grid">
+          
+          <div class="person-card" onclick="openModalPersonne('Général Lord Henry MONTCLARE', 'Commandant de la Garde Royale', 'portrait-garde.jpg', 'logo-garde-royale.jpg', 'Le Général Lord Henry Montclare dirige les régiments de la Garde Royale et assure la sécurité directe du Souverain, de la Couronne et des palais nationaux.')">
+            <img src="portrait-garde.jpg" class="person-avatar" onclick="event.stopPropagation(); zoomImage(this.src)" onerror="this.src='profil-neutre.jpg'">
+            <div class="card-title">Général Lord Henry MONTCLARE</div>
+            <div class="card-subtitle">Commandant de la Garde Royale</div>
+          </div>
+
+        </div>
+
+        <button class="btn-grades" onclick="openGradesModal('Garde Royale', 'grades-garde.jpg')">👑 Consulter la Grille des Grades de la Garde Royale</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- MODALE DÉTAILLÉE UNIFIÉE -->
+<div id="global-modal" class="modal-window">
+  <div class="modal-content">
+    <button class="btn-close" onclick="closeModal()">✕ Fermer</button>
+    <div class="modal-header-flex" id="modal-header-flex">
+      <div class="modal-img-box" id="box-portrait" style="display:none;">
+        <img id="m-portrait" src="" class="modal-avatar-big" onclick="zoomImage(this.src)" onerror="this.src='profil-neutre.jpg'">
+      </div>
+      <div class="modal-img-box" id="box-logo" style="display:none;">
+        <img id="m-logo" src="" class="modal-full-img" onclick="zoomImage(this.src)" onerror="this.style.display='none'">
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:10px;">
+      <h2 id="m-nom" style="font-family:'Cinzel',serif; color:var(--def-navy); margin:0;"></h2>
+      <div id="m-role" style="font-size:12px; color:var(--accent-gold); font-weight:700; text-transform:uppercase; margin-top:4px;"></div>
+    </div>
+    <div style="margin-top:20px; line-height:1.7; color:#334155; font-size:14px;">
+      <p id="m-bio"></p>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX ZOOM -->
+<div id="image-lightbox" onclick="this.style.display='none'">
+  <img id="lightbox-img" src="">
+</div>
+
+<footer>
+  <div>Forces Armées de Sa Majesté — Ministère de la Défense du Royaume-Uni de Novarcis</div>
+  <div style="margin-top:5px; font-size:11px; color:#64748b;">État-Major de la Défense — Tous droits réservés</div>
+</footer>
+
+<script>
+// Pour les fiches de personnes / commandants (2 images : portrait + logo)
+function openModalPersonne(nom, role, portrait, logo, bio) {
+  document.getElementById('box-portrait').style.display = 'flex';
+  document.getElementById('box-logo').style.display = 'flex';
+  
+  document.getElementById('m-nom').innerText = nom;
+  document.getElementById('m-role').innerText = role;
+  document.getElementById('m-bio').innerHTML = bio;
+  
+  const imgP = document.getElementById('m-portrait');
+  imgP.src = portrait;
+  imgP.onerror = () => { imgP.src = 'profil-neutre.jpg'; };
+
+  const imgL = document.getElementById('m-logo');
+  imgL.src = logo;
+  imgL.style.display = 'block';
+  imgL.onerror = () => { imgL.style.display = 'none'; };
+
+  document.getElementById('global-modal').style.display = 'block';
+}
+
+// Pour les navires / porte-avions : Logo en haut (#m-portrait), Bâtiment entier en bas (#m-logo)
+function openNavireModal(nom, role, photoNavire, logoMarine, bio) {
+  document.getElementById('box-portrait').style.display = 'flex';
+  document.getElementById('box-logo').style.display = 'flex';
+  
+  document.getElementById('m-nom').innerText = nom;
+  document.getElementById('m-role').innerText = role;
+  document.getElementById('m-bio').innerHTML = bio;
+  
+  // Utilise l'emplacement du haut pour afficher le logo de la marine en format libre
+  const imgP = document.getElementById('m-portrait');
+  imgP.className = 'modal-full-img';
+  imgP.src = logoMarine;
+  imgP.onerror = () => { imgP.src = 'profil-neutre.jpg'; };
+
+  // Utilise l'emplacement du bas pour afficher la photo entière du porte-avions
+  const imgL = document.getElementById('m-logo');
+  imgL.className = 'modal-full-img';
+  imgL.src = photoNavire;
+  imgL.style.display = 'block';
+  imgL.onerror = () => { imgL.style.display = 'none'; };
+
+  document.getElementById('global-modal').style.display = 'block';
+}
+
+// Pour le clic sur les chiffres d'effectifs (1 SEUL LOGO d'armée plein format sans cadre)
+function openSingleLogoModal(titre, chiffre, logoArmee, description) {
+  document.getElementById('box-portrait').style.display = 'none';
+  document.getElementById('box-logo').style.display = 'flex';
+
+  document.getElementById('m-nom').innerText = titre;
+  document.getElementById('m-role').innerText = chiffre;
+  document.getElementById('m-bio').innerHTML = description;
+
+  const imgL = document.getElementById('m-logo');
+  imgL.className = 'modal-full-img';
+  imgL.src = logoArmee;
+  imgL.style.display = 'block';
+
+  document.getElementById('global-modal').style.display = 'block';
+}
+
+// Fonction dédiée pour afficher la chaîne de commandement
+function openChainModal() {
+  document.getElementById('box-portrait').style.display = 'none';
+  document.getElementById('box-logo').style.display = 'flex';
+
+  document.getElementById('m-nom').innerText = 'Chaîne de Commandement Militaire';
+  document.getElementById('m-role').innerText = 'Haut Commandement Interarmées';
+  document.getElementById('m-bio').innerHTML = `
+    <strong>Architecture de Commandement du Royaume-Uni de Novarcis :</strong><br><br>
+    <strong>1. Autorité Suprême :</strong> S.M. le Roi et le Premier Ministre définissent la politique de défense et détiennent l'autorité suprême.<br><br>
+    <strong>2. Commandement Opérationnel :</strong> Les ordres sont transmis au <strong>Chef d'État-Major des Armées (CDS)</strong>, qui pilote la stratégie interarmées globale.<br><br>
+    <strong>3. Composantes et Sous-Chefs :</strong> Le CDS répartit et supervise les opérations auprès des quatre branches principales :<br>
+    • Le Chef d'État-Major de la Marine (First Sea Lord)<br>
+    • Le Chef d'État-Major de la Royal Air Force (CAS)<br>
+    • Le Chef d'État-Major de l'Armée de Terre<br>
+    • Le Commandant de la Garde Royale
+  `;
+
+  const imgL = document.getElementById('m-logo');
+  imgL.className = 'modal-full-img';
+  imgL.src = 'logo-ministere-defense.jpg';
+  imgL.style.display = 'block';
+  imgL.onerror = () => { imgL.style.display = 'none'; };
+
+  document.getElementById('global-modal').style.display = 'block';
+}
+
+// Pour la planche des grades (1 SEULE IMAGE PLEIN FORMAT SANS LISERÉ DORÉ DE RESTRICTION)
+function openGradesModal(armeeName, imageGrades) {
+  document.getElementById('box-portrait').style.display = 'none';
+  document.getElementById('box-logo').style.display = 'flex';
+
+  document.getElementById('m-nom').innerText = 'Grille des Grades Officiels';
+  document.getElementById('m-role').innerText = armeeName;
+  document.getElementById('m-bio').innerHTML = `
+    <strong>Structure Hiérarchique de la composante (${armeeName}) :</strong><br>
+    Consultez la planche officielle ci-dessus pour le détail complet des galons, insignes et rangs.
+  `;
+
+  const imgL = document.getElementById('m-logo');
+  imgL.className = 'modal-full-img';
+  imgL.src = imageGrades;
+  imgL.style.display = 'block';
+  imgL.onerror = () => { imgL.src = 'profil-neutre.jpg'; };
+
+  document.getElementById('global-modal').style.display = 'block';
+}
+
+function closeModal() { 
+  document.getElementById('global-modal').style.display = 'none'; 
+}
+
+function zoomImage(src) {
+  if(!src || src.includes('undefined')) return;
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('image-lightbox').style.display = 'flex';
+}
+
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
