@@ -236,25 +236,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 100%;
+      flex: 1;
+      min-width: 200px;
     }
     
-    /* STYLE PERSONNE AVEC BORDURE */
-    .modal-avatar-big {
-      width: 160px;
-      height: 190px;
-      border-radius: 4px;
-      border: 2px solid var(--accent-gold);
-      cursor: zoom-in;
-      background: #f8fafc;
-      padding: 4px;
-      object-fit: cover;
-    }
-
-    /* STYLE IMAGE PLEIN FORMAT SANS LISERÉ DE RESTRICTION */
+    /* STYLE PLEIN FORMAT SANS LISERÉ DE RESTRICTION POUR LES PERSONNAGES ET AUTRES */
     .modal-full-img {
       max-width: 100%;
-      max-height: 380px;
+      max-height: 280px;
       object-fit: contain;
       cursor: zoom-in;
       border-radius: 4px;
@@ -423,7 +412,6 @@
         <h3 style="font-family:'Cinzel',serif; color:var(--def-navy); margin-top:20px;">Navires Amiraux & Porte-Avions</h3>
         <div class="card-grid">
           
-          <!-- UTILISATION DE openNavireModal POUR AFFICHER D'ABORD LE LOGO PUIS LE BÂTIMENT ENTIER -->
           <div class="equip-card" onclick="openNavireModal('HMS Roi Théodore III (R08)', 'Porte-avions de classe Queen Elizabeth', 'porte-avions-1.jpg', 'logo-royal-navy.jpg', 'Premier porte-avions amiral de la flotte. Déplacement de 65 000 tonnes, emportant jusqu’à 40 aéronefs (chasseurs F-35B Lightning II et hélicoptères Merlin).')">
             <img src="porte-avions-1.jpg" class="equip-img" onclick="event.stopPropagation(); zoomImage(this.src)" onerror="this.src='profil-neutre.jpg'">
             <div class="card-title">HMS Roi Théodore III</div>
@@ -523,7 +511,7 @@
     <button class="btn-close" onclick="closeModal()">✕ Fermer</button>
     <div class="modal-header-flex" id="modal-header-flex">
       <div class="modal-img-box" id="box-portrait" style="display:none;">
-        <img id="m-portrait" src="" class="modal-avatar-big" onclick="zoomImage(this.src)" onerror="this.src='profil-neutre.jpg'">
+        <img id="m-portrait" src="" class="modal-full-img" onclick="zoomImage(this.src)" onerror="this.src='profil-neutre.jpg'">
       </div>
       <div class="modal-img-box" id="box-logo" style="display:none;">
         <img id="m-logo" src="" class="modal-full-img" onclick="zoomImage(this.src)" onerror="this.style.display='none'">
@@ -550,7 +538,7 @@
 </footer>
 
 <script>
-// Pour les fiches de personnes / commandants (2 images : portrait + logo)
+// Pour les fiches de personnes / commandants (2 images : portrait plein format + logo côte à côte)
 function openModalPersonne(nom, role, portrait, logo, bio) {
   document.getElementById('box-portrait').style.display = 'flex';
   document.getElementById('box-logo').style.display = 'flex';
@@ -560,10 +548,12 @@ function openModalPersonne(nom, role, portrait, logo, bio) {
   document.getElementById('m-bio').innerHTML = bio;
   
   const imgP = document.getElementById('m-portrait');
+  imgP.className = 'modal-full-img';
   imgP.src = portrait;
   imgP.onerror = () => { imgP.src = 'profil-neutre.jpg'; };
 
   const imgL = document.getElementById('m-logo');
+  imgL.className = 'modal-full-img';
   imgL.src = logo;
   imgL.style.display = 'block';
   imgL.onerror = () => { imgL.style.display = 'none'; };
@@ -580,13 +570,11 @@ function openNavireModal(nom, role, photoNavire, logoMarine, bio) {
   document.getElementById('m-role').innerText = role;
   document.getElementById('m-bio').innerHTML = bio;
   
-  // Utilise l'emplacement du haut pour afficher le logo de la marine en format libre
   const imgP = document.getElementById('m-portrait');
   imgP.className = 'modal-full-img';
   imgP.src = logoMarine;
   imgP.onerror = () => { imgP.src = 'profil-neutre.jpg'; };
 
-  // Utilise l'emplacement du bas pour afficher la photo entière du porte-avions
   const imgL = document.getElementById('m-logo');
   imgL.className = 'modal-full-img';
   imgL.src = photoNavire;
@@ -640,7 +628,7 @@ function openChainModal() {
   document.getElementById('global-modal').style.display = 'block';
 }
 
-// Pour la planche des grades (1 SEULE IMAGE PLEIN FORMAT SANS LISERÉ DORÉ DE RESTRICTION)
+// Pour la planche des grades
 function openGradesModal(armeeName, imageGrades) {
   document.getElementById('box-portrait').style.display = 'none';
   document.getElementById('box-logo').style.display = 'flex';
